@@ -1,1 +1,1 @@
-# Applied_Project_And_Dissertation
+# Applied_Project_And_Minor_Dissertation
