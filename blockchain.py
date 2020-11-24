@@ -12,13 +12,15 @@ class Blockchain:
 
     def __init__(self):
         # Every blockchain instance will contain a chain attribute implemented as a list. The list will be a list of blocks,consisting of block items
-        self.chain = []
+        # Setting genesis to be the first block of the chain
+        self.chain = [Block.genesis()]
 
     # Method to enable the blockchain to add blocks
     def add_block(self, data):
-        # instance of block class containing the data
+        #self.chain[-1] refers to the last block at the index of -1
+        # blocks are added using mine_block
         # append this block and data to the chain
-        self.chain.append(Block(data))
+        self.chain.append(Block.mine_block(self.chain[-1],data))
     # Test
 
     def __repr__(self):
