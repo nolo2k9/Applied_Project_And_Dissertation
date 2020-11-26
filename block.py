@@ -1,6 +1,5 @@
 import time
 
-
 class Block:
     """
     Unit of storage.

@@ -38,9 +38,12 @@ Hash functions consist of a set of 5 properties:
 
 The way the hash is implemented into the blockchain is essentially much like the pointers to data in a linked list. Each block contains the data and a hash pointer that points to the previous block, creating a chain. The hash pointer contains the address of the previous block and the hash of the data inside the previous block. This is what makes blockchain so reliable in its security. If a hacker attempts to hack a block or change the data in one of the blocks this change in data means the hash of the data will also change. The blocks with hash pointers that are reliant on the previous hash can now no longer find that hash value because the data has changed.
 
+***
 ### References
 [1] The wiki information of Sha-2; Includes the sha-256; https://en.wikipedia.org/wiki/SHA-2
+
 [2] Widget to show sha-256 in action; https://emn178.github.io/online-tools/sha256.html
+
 [3] A fast and loose insight into hashing in a blockchain; https://blockgeeks.com/guides/what-is-hashing/
 
 
