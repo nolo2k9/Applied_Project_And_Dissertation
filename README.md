@@ -46,6 +46,10 @@ The way the hash is implemented into the blockchain is essentially much like the
 
 [3] A fast and loose insight into hashing in a blockchain; https://blockgeeks.com/guides/what-is-hashing/
 
+[4] Article that gives a good guide on how to implement a hashing function; https://analytics4all.org/tag/hash/
+
+[5] json.dumps(); Useful for stringifying; https://docs.python.org/3/library/json.html
+
 
 
 

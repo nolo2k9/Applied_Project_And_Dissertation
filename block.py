@@ -1,4 +1,5 @@
 import time
+from hashing import crypto_hash # hash function
 
 class Block:
     """
