@@ -12,12 +12,12 @@ def crypto_hash(*args):
     # parse data args to a string using a lambda function
     stringified_args = sorted(map(lambda data: json.dumps(data), args))
 
-    print(f'stringified_args: {stringified_args}')
-
     #join our args into a string
     joined_data = ''.join(stringified_args)
 
-    print(f'joined_data: {joined_data}')
+    #debug output
+    #print(f'stringified_args: {stringified_args}')
+    #print(f'joined_data: {joined_data}')
 
     return hashlib.sha256(joined_data.encode('utf-8')).hexdigest() # hash function
 

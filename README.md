@@ -50,6 +50,8 @@ The way the hash is implemented into the blockchain is essentially much like the
 
 [5] json.dumps(); Useful for stringifying; https://docs.python.org/3/library/json.html
 
+[6] hashlib python docs; https://docs.python.org/2/library/hashlib.html
+
 
 
 

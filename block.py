@@ -51,7 +51,7 @@ class Block:
         # last_hash is the hash of the previous block
         last_hash = last_block.hash
         # Intrim hash value
-        hash = f'{timestamp}-{last_hash}'
+        hash = crypto_hash(timestamp, last_hash, data) # hash function called in
 
         return Block(timestamp, last_hash, hash, data)
 
