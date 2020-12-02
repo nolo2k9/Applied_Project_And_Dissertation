@@ -1,5 +1,7 @@
 import time
 from backend.utils.hashing import crypto_hash  # hash function
+#Import minerate
+from backend.config import MINE_RATE
 
 #Global variable GENESIS_DATA
 #GENESIS_DATA dictionary
@@ -8,7 +10,7 @@ GENESIS_DATA = {
     'last_hash': 'genesis_last_hash',
     'hash': 'genesis_hash',
     'data': [],
-    'difficulty': 3,
+    'difficulty': 5,
     'nonce': 'genesis_nonce'
 
 }
@@ -66,8 +68,8 @@ class Block:
         timestamp = time.time_ns()
         # last_hash is the hash of the previous block
         last_hash = last_block.hash
-        # Setting the difficulty for new blocks to that of the previous block
-        difficulty = last_block.difficulty
+        # Setting the difficulty for new blocks to depend on the change_difficulty()
+        difficulty = Block.change_difficulty(last_block, timestamp)
         # Settting nonce to zero
         nonce = 0
         # Intrim hash value
@@ -88,7 +90,8 @@ class Block:
 
             # Regenerate timestamp to have to most accurate value possible as it could take a while to find a correct number of zeros
             timestamp = time.time_ns()
-
+            # Setting the difficulty for new blocks to depend on the change_difficulty()
+            difficulty = Block.change_difficulty(last_block, timestamp)
             # Regnerate the hash inputs
             hash = crypto_hash(timestamp, last_hash, data, difficulty, nonce)
 
@@ -110,7 +113,31 @@ class Block:
           GENESIS_DATA['difficulty'],
           GENESIS_DATA['nonce']
       )
-      
+    
+    
+    @staticmethod 
+    def change_difficulty(last_block, new_timestamp):
+        """
+        Method to calculate the adjusted difficulty according to the set MINE_RATE
+        If the last block is mined faster than the MINE_RATE it will increase the difficulty and make it more difficult for the next block.
+        If the last block is mined slower than the MINE_RATE it will decrease the difficulty and make it less diffiult for the next block.
+        Default of 1 
+        """
+        
+        
+        """
+        Checking the timestamp of the previous block
+        If the value of the new_timestamp - last_block.last_block.timestamp is less than the MINE_RATE
+        Increase the difficulty by 1 otherwise knock 1 off the difficulty
+        """
+        if(new_timestamp - last_block.timestamp) < MINE_RATE:
+            return last_block.difficulty +1
+        
+        if(last_block.difficulty -1 ) > 0:
+            return last_block.difficulty - 1
+        
+        return 1
+        
 
 
 def main():
