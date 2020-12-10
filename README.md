@@ -26,6 +26,8 @@ Wallets store the public and private key for the owner. They track your balance 
 ## Mining
 Miners enable transactions to be added to the blockchain. When a transaction is made within the network, it joins the transaction pool. After being admitted to the transaction pool, the transaction will be in an unconfirmed state. Miners take unconfirmed transactions and must complete a proof of work. This is a computational puzzle the miners must solve. These puzzles are difficult to solve with a low probability of solving them randomly. It is computationally expensive to solve this puzzle. When this is solved the miner will be granted the right to add this block to the chain. When the solution has been agreed upon the miner will receive currency which is added to their wallet.
 
+## Proof of work
+
 ## Hashing 
 The functional description of what hashing is, is basically taking in an input of any length, in this case our block information and then using that information and encrytping/hashing it into an output of a fixed length. The commonly used hashing function is the Sha-256 algorithm [1]. I've included in the references section a fun online widget that very simply explains what is meant by the opening sentence of this section [2].
 
@@ -37,6 +39,14 @@ Hash functions consist of a set of 5 properties:
 5. Each input should have its own unique hash i.e. no two hashes should end up the same.
 
 The way the hash is implemented into the blockchain is essentially much like the pointers to data in a linked list. Each block contains the data and a hash pointer that points to the previous block, creating a chain. The hash pointer contains the address of the previous block and the hash of the data inside the previous block. This is what makes blockchain so reliable in its security. If a hacker attempts to hack a block or change the data in one of the blocks this change in data means the hash of the data will also change. The blocks with hash pointers that are reliant on the previous hash can now no longer find that hash value because the data has changed.
+
+
+# Virtual Enviornment set up to create an isolated enviornment to do tests without having if effect the whole system
+**Activate virtual enviornment**
+To run virtual environment: ```source blockchain-env/bin/activate ```
+
+**Install Packages**
+```pip3 install -r requirements.txt```
 
 ***
 ### References
