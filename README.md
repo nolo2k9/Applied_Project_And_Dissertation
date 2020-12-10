@@ -52,8 +52,8 @@ The way the hash is implemented into the blockchain is essentially much like the
 
 [6] hashlib python docs; https://docs.python.org/2/library/hashlib.html
 
+General language dicitonary.
 
+Invalid one?
 
-
-
-
+real world - library book analogy
