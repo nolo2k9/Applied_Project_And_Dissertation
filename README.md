@@ -48,6 +48,10 @@ To run virtual environment: ```source blockchain-env/bin/activate ```
 **Install Packages**
 ```pip3 install -r requirements.txt```
 
+**Run average_block_rate.py **
+
+```python -m backend.scripts.average_block_rate```
+
 ***
 ### References
 [1] The wiki information of Sha-2; Includes the sha-256; https://en.wikipedia.org/wiki/SHA-2
