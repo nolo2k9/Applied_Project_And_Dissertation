@@ -12,7 +12,6 @@ GENESIS_DATA = {
     'data': [],
     'difficulty': 5,
     'nonce': 'genesis_nonce'
-
 }
 
 class Block:
@@ -113,8 +112,7 @@ class Block:
           GENESIS_DATA['difficulty'],
           GENESIS_DATA['nonce']
       )
-    
-    
+     
     @staticmethod 
     def change_difficulty(last_block, new_timestamp):
         """
@@ -122,8 +120,7 @@ class Block:
         If the last block is mined faster than the MINE_RATE it will increase the difficulty and make it more difficult for the next block.
         If the last block is mined slower than the MINE_RATE it will decrease the difficulty and make it less diffiult for the next block.
         Default of 1 
-        """
-        
+        """ 
         
         """
         Checking the timestamp of the previous block
@@ -138,8 +135,6 @@ class Block:
         
         return 1
         
-
-
 def main():
     # Experimenting adding data
     genesis_block = Block.genesis()
