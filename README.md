@@ -65,9 +65,3 @@ To run virtual environment: ```source blockchain-env/bin/activate ```
 [5] json.dumps(); Useful for stringifying; https://docs.python.org/3/library/json.html
 
 [6] hashlib python docs; https://docs.python.org/2/library/hashlib.html
-
-General language dicitonary.
-
-Invalid one?
-
-real world - library book analogy
