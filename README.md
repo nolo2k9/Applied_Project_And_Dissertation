@@ -43,8 +43,11 @@ The way the hash is implemented into the blockchain is essentially much like the
 ## IMPORTANT: All commands should be run in a BASH terminal
 
 **Install Packages**
+
 ```pip install -U pylint``` Linter pylint for managing packages
+
 ```python -m venv blockchain-env``` This is for creating the environment for running the application in a safe space
+
 ```pip3 install -r requirements.txt```
 
 ## Commands to run files/environments
@@ -52,15 +55,18 @@ The way the hash is implemented into the blockchain is essentially much like the
 ### Virtual Enviornment set up to create an isolated environment to do tests without having if effect the whole system
 **Activate virtual enviornment**
 
-To run virtual environment: ```source blockchain-env/bin/activate ```
+To run virtual environment: ```source blockchain-env/bin/activate```
+
+**Run block class. shows an example of what is included in a block, and the difficulty**
+
+```python -m backend.blockchain.block```
 
 **Run a demo of the average rate of blocks - displays difficulty and mining (not necessary for any functionality, is purely with testing/demoing in mind)**
 
 ```python -m backend.scripts.average_block_rate```
 
-
-
-
+**Run Demo of hex_to_binary class - (not yet implemented fully)**
+```python -m backend.util.hex_to_binary```
 
 ***
 ### *References*
@@ -75,3 +81,5 @@ To run virtual environment: ```source blockchain-env/bin/activate ```
 [5] json.dumps(); Useful for stringifying; https://docs.python.org/3/library/json.html
 
 [6] hashlib python docs; https://docs.python.org/2/library/hashlib.html
+
+[7] int() function; for string to int conversion and binary; https://docs.python.org/3.4/library/functions.html?highlight=int#int
