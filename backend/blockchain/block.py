@@ -1,6 +1,6 @@
 import time
 from backend.utils.hashing import crypto_hash  # hash function
-#Import minerate
+from backend.utils.hex_to_binary import hex_to_binary # hex_to_binary function
 from backend.config import MINE_RATE
 
 #Global variable GENESIS_DATA
@@ -83,7 +83,7 @@ class Block:
         When the correct nonce is found the loop will be broken 
         Then a new block will be returned
         """
-        while hash[0:difficulty] != '0' * difficulty:
+        while hex_to_binary(hash)[0:difficulty] != '0' * difficulty: # hash is converted here using hex_to_binary imported function
             # Add one to the nonce value
             nonce += 1
 

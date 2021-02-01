@@ -1,6 +1,9 @@
 # Applied_Project_And_Minor_Dissertation
 #### Keith Nolan & Cuan O'Conner.
 
+# Python Version
+
+It is important to use python 3.8 as some modules and their method calls are only present in 3.7 and beyond.
 
 # About the Blockchain
 A Blockchain is a decentralised and distributed ledger that stores data such as transactions. This data is publically shared accross all nodes on its network.
@@ -66,7 +69,7 @@ To run virtual environment: ```source blockchain-env/bin/activate```
 ```python -m backend.scripts.average_block_rate```
 
 **Run Demo of hex_to_binary class - (not yet implemented fully)**
-```python -m backend.util.hex_to_binary```
+```python -m backend.utils.hex_to_binary```
 
 ***
 ### *References*

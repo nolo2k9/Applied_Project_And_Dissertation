@@ -1,6 +1,5 @@
 from backend.blockchain.block import Block
 
-
 class Blockchain:
     """
     This class contains the code for the blockchain.
