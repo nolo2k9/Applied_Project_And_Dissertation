@@ -49,6 +49,9 @@ class Block:
             f'difficulty: {self.difficulty}, '
             f'nonce: {self.nonce}) '
         )
+        
+    def __eq__(self, other):
+        return self.__dict__ == other.dict
 
     @staticmethod
     def mine_block(last_block, data):
@@ -171,7 +174,7 @@ class Block:
         
         if block.hash != reconstructed_hash:
             raise Exception('Block hash must be correct: Block hash must be a valid combination of the block fields')
-        
+          
 def main():
     genesis_block = Block.genesis()
     bad_block = Block.mine_block(Block.genesis(), 'foo')
