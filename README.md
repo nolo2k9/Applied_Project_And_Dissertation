@@ -70,6 +70,10 @@ To run virtual environment: ```source blockchain-env/bin/activate```
 
 **Run Demo of hex_to_binary class - (not yet implemented fully)**
 ```python -m backend.utils.hex_to_binary```
+**Run the application and API**
+- Activate the virtual environment ```source blockchain-env/bin/activate```
+- Start the application and api
+```python3 -m backend.app```
 
 ***
 ### *References*
