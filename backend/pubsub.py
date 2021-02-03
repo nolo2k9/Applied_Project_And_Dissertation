@@ -11,22 +11,40 @@ pnconfig.publish_key = "pub-c-cf24a228-2121-4227-8fd2-e3c00c9c63a9"
 pubnub = PubNub(pnconfig)
 #Experiment data
 TEST_CHANNEL = 'TEST_CHANNEL'
-#Send network request
-pubnub.subscribe().channels([TEST_CHANNEL]).execute()
+
 
 class Listener(SubscribeCallback):
     #Subscribe to message channel
     def message(self,pubnub,message_object):
-        print(f'\n-- Incoming message_object:  {message_object}')
-#Listen for incoming messages
-pubnub.add_listener(Listener())
+        print(f'\n-- Channel:  {message_object.channel} | Message: {message_object.message}')
+
+class PubSub():
+    """
+    Handles publish subscribe layer of application
+    Provides communication between nodes in the blockchain network
+    """
+    def __init__(self):
+        self.pubnub = PubNub(pnconfig)
+        #Subscribe to test channel
+        self.pubnub.subscribe().channels([TEST_CHANNEL]).execute()
+        #Listen for incoming messages
+        self.pubnub.add_listener(Listener())
+        
+    def publish(self, channel, message):
+        """
+        Publish the message object to channel
+        """
+        #Publish message to channel
+        self.pubnub.publish().channel(channel).message(message).sync()
+    
 
 
 def main():
+    pubsub = PubSub()
     #Ensures that the publish channel is ran after the subscribe (avoids a race )
     time.sleep(1)
-    #Publish message to channel
-    pubnub.publish().channel(TEST_CHANNEL).message({'foo': 'bar'}).sync()
+    pubsub.publish(TEST_CHANNEL, {'foo': 'bar'})
+    
     
 if __name__ == '__main__':
     main()

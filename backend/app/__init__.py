@@ -2,10 +2,13 @@
 from flask import Flask, jsonify
 #Import the Blockchain class
 from backend.blockchain.blockchain import Blockchain
+#Import pubsub class
+from backend.pubsub import PubSub
 
 
 app = Flask(__name__)
 blockchain = Blockchain()
+pubsub = PubSub()
 
 @app.route('/')
 def route_default():
