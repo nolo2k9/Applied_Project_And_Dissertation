@@ -1,7 +1,8 @@
 #Import flask
-from flask import Flask
+from flask import Flask, jsonify
 #Import the Blockchain class
 from backend.blockchain.blockchain import Blockchain
+
 
 app = Flask(__name__)
 blockchain = Blockchain()
@@ -10,14 +11,18 @@ blockchain = Blockchain()
 def route_default():
     return 'Welcome to the Delta coin blockchain'
 
-#Test data add more blocks
-for i in range(3):
-    blockchain.add_block(i)
-
 @app.route('/blockchain')
 def route_blockchain():
-    #Return the __repr__ this makes the data readable by flask
-    return blockchain.__repr__()
+    #Wrapping call to blockchain with jsonify
+    return jsonify(blockchain.to_json())
 
-
+@app.route('/blockchain/mine')
+def route_blockchain_mine():
+    #Temp transaction data
+    transaction_data = 'stubbed_transaction_data'
+    #Data for new block with temp data
+    blockchain.add_block(transaction_data)
+    #Display new block mined
+    return jsonify(blockchain.chain[-1].to_json())
+    
 app.run()

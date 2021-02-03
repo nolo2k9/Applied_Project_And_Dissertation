@@ -53,6 +53,11 @@ class Block:
     def __eq__(self, other):
         return self.__dict__ == other.dict
 
+    def to_json(self):
+        """
+        Serialize the block into a dicionary representation
+        """
+        return self.__dict__
     @staticmethod
     def mine_block(last_block, data):
         """

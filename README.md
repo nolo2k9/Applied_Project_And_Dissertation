@@ -90,3 +90,5 @@ To run virtual environment: ```source blockchain-env/bin/activate```
 [6] hashlib python docs; https://docs.python.org/2/library/hashlib.html
 
 [7] int() function; for string to int conversion and binary; https://docs.python.org/3.4/library/functions.html?highlight=int#int
+[8] https://cloud.google.com/pubsub/docs/overview
+[9] https://flask.palletsprojects.com/en/1.1.x/
