@@ -56,6 +56,9 @@ It is important to use python 3.8 as some modules and their method calls are onl
 
 - Start the application and api ```python3 -m backend.app```
 
+**Run a peer instance - Export environment variable (for testing)**
+```export PEER=True && python3 -m backend.app```
+
 ### Demos
 **Run block class. shows an example of what is included in a block, and the difficulty**
 ```python -m backend.blockchain.block```
