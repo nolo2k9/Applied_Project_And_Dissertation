@@ -11,7 +11,7 @@ import random
 
 app = Flask(__name__)
 blockchain = Blockchain()
-pubsub = PubSub()
+pubsub = PubSub(blockchain)
 
 @app.route('/')
 def route_default():
@@ -29,7 +29,9 @@ def route_blockchain_mine():
     #Data for new block with temp data
     blockchain.add_block(transaction_data)
     #Display new block mined
-    return jsonify(blockchain.chain[-1].to_json())
+    block = blockchain.chain[-1]
+    pubsub.broadcast_block(block)
+    return jsonify(block.to_json())
 
 # define our port and conditions
 PORT = 5000

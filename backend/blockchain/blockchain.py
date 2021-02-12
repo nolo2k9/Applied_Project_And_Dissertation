@@ -42,7 +42,7 @@ class Blockchain:
              Blockchain.isValidChain(chain)
         
         except Exception as e:
-           raise Exception(f'Current chain cannot be replaced: The incoming chain must be correclty formatted: {e}')
+           raise Exception(f'Current chain cannot be replaced: The incoming chain must be correctly formatted: {e}')
         #If everything is correct assign the current chain to the new chain
         self.chain = chain
            

@@ -120,6 +120,13 @@ class Block:
           GENESIS_DATA['difficulty'],
           GENESIS_DATA['nonce']
       )
+
+    @staticmethod
+    def from_json(block_json):
+        """
+        This method will deserialize a blocks json representation back into a block instance.
+        """
+        return Block(**block_json)
      
     @staticmethod 
     def change_difficulty(last_block, new_timestamp):
@@ -189,7 +196,5 @@ def main():
     except Exception as e:
         print(f'is_valid_block: {e}')
     
-
-
 if __name__ == '__main__':
     main()
