@@ -154,7 +154,7 @@ class Block:
     def isValidBlock(last_block, block):
         """
         This method validates a block by:
-        - The block must have the correct lasthash reference
+        - The block must have the correct last hash reference
         - The block must have the correct number of leading zeros according to the difficulty of the hash (proof of work requirements)
         - The difficulty must only be adjusted by 1
         - The block hash must be a valid combination of the block fields

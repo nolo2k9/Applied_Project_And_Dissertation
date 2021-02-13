@@ -72,18 +72,32 @@ It is important to use python 3.8 as some modules and their method calls are onl
 ### *References*
 [1] The wiki information of Sha-2; Includes the sha-256; https://en.wikipedia.org/wiki/SHA-2
 
+
 [2] Widget to show sha-256 in action; https://emn178.github.io/online-tools/sha256.html
+
 
 [3] A fast and loose insight into hashing in a blockchain; https://blockgeeks.com/guides/what-is-hashing/
 
+
 [4] Article that gives a good guide on how to implement a hashing function; https://analytics4all.org/tag/hash/
+
 
 [5] json.dumps(); Useful for stringifying; https://docs.python.org/3/library/json.html
 
+
 [6] hashlib python docs; https://docs.python.org/2/library/hashlib.html
+
 
 [7] int() function; for string to int conversion and binary; https://docs.python.org/3.4/library/functions.html?highlight=int#int
 
+
 [8] https://cloud.google.com/pubsub/docs/overview
 
+
 [9] https://flask.palletsprojects.com/en/1.1.x/
+
+
+[10] Loose inspiration taken for peer data validation; https://livecodestream.dev/post/from-zero-to-blockchain-in-python-part-1/
+
+
+[11] Useful info on synching peers; https://bigishdata.com/2017/10/27/build-your-own-blockchain-part-2-syncing-chains-from-different-nodes/
