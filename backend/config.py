@@ -12,3 +12,6 @@ SECS = 1000 * MILLIS
 
 #Declaring a mining rate for blocks
 MINE_RATE = 4 * SECS
+
+#Declaring a starting balance for each wallet
+STARTING_BALANCE = 1000
