@@ -8,6 +8,7 @@ from cryptography.hazmat.backends import default_backend
 from cryptography.hazmat.primitives.asymmetric import ec
 # Import hashing implmentation
 from cryptography.hazmat.primitives import hashes
+from cryptography.exceptions import InvalidSignature
 
 
 class Wallet:
@@ -50,7 +51,20 @@ class Wallet:
         return self.private_key.sign(json.dumps(data).encode('utf-8'), 
                                      ec.ECDSA(hashes.SHA256())
                                      )
-       
+
+    @staticmethod
+    def verify(public_key, data, signature):
+        """
+        This method verify's a signature based on the wallets public and data.
+        """
+        try:
+            public_key.verify(signature,json.dumps(data).encode('utf-8'),ec.ECDSA(hashes.SHA256()))
+            return True
+        #catch Invalid Signature exception
+        except InvalidSignature:
+                return False
+        
+           
         
     
         
@@ -63,6 +77,13 @@ def main():
         data = {'foo': 'bar'}
         signature = wallet.sign(data)
         print(f'signature: {signature}')
+        #Testing a valid wallet verification
+        should_be_valid = Wallet.verify(wallet.public_key, data, signature)
+        print(f'should be valid: {should_be_valid}')
+        
+        #Testing an invalid wallet verification (random wallet)
+        should_be_invalid = Wallet.verify(Wallet().public_key, data, signature)
+        print(f'should not be valid: {should_be_invalid}')
     
 if __name__ == '__main__':
         main()
