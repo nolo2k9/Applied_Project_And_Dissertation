@@ -39,14 +39,14 @@ class Blockchain:
                 'Current chain cannot be replaced: The incoming chain must be longer.')
         # Calling the isValidChain method to ensure requirements are met
         try:
-             Blockchain.isValidChain(chain)
-        
+            Blockchain.isValidChain(chain)
+
         except Exception as e:
-           raise Exception(f'Current chain cannot be replaced: The incoming chain must be correctly formatted: {e}')
-        #If everything is correct assign the current chain to the new chain
+            raise Exception(
+                f'Current chain cannot be replaced: The incoming chain must be correctly formatted: {e}')
+        # If everything is correct assign the current chain to the new chain
         self.chain = chain
-           
-        
+
     def to_json(self):
         """
         Serialize the blockchain into a list of blocks
@@ -61,13 +61,13 @@ class Blockchain:
         """
 
         blockchain = Blockchain()
-        blockchain.chain = list( 
+        blockchain.chain = list(
             # transforms jsonified block data
-            map(lambda block_json: Block.from_json(block_json), chain_json) 
+            map(lambda block_json: Block.from_json(block_json), chain_json)
         )
 
         return blockchain
-    
+
     @staticmethod
     def isValidChain(chain):
         """
@@ -78,16 +78,16 @@ class Blockchain:
         # Check to ensure the genesis block is valid
         if chain[0] != Block.genesis():
             raise Exception('The genesis block must be valid')
-        
+
         # Loop through the blocks in the chain
-        for i in range(1,len(chain)):
+        for i in range(1, len(chain)):
             block = chain[i]
             # Last block is previous element
             last_block = chain[i-1]
             # Check conditions laid out in isValidBlock
             Block.isValidBlock(last_block, block)
-        
-        
+
+
 def main():
     # Experimenting adding blocks
     blockchain = Blockchain()

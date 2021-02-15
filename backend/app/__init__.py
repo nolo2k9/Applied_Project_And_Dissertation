@@ -1,8 +1,8 @@
-#Import flask
+# Import flask
 from flask import Flask, jsonify
-#Import the Blockchain class
+# Import the Blockchain class
 from backend.blockchain.blockchain import Blockchain
-#Import pubsub class
+# Import pubsub class
 from backend.pubsub import PubSub
 
 import os
@@ -14,25 +14,29 @@ app = Flask(__name__)
 blockchain = Blockchain()
 pubsub = PubSub(blockchain)
 
+
 @app.route('/')
 def route_default():
     return 'Welcome to the Delta coin blockchain'
 
+
 @app.route('/blockchain')
 def route_blockchain():
-    #Wrapping call to blockchain with jsonify
+    # Wrapping call to blockchain with jsonify
     return jsonify(blockchain.to_json())
+
 
 @app.route('/blockchain/mine')
 def route_blockchain_mine():
-    #Temp transaction data
+    # Temp transaction data
     transaction_data = 'stubbed_transaction_data'
-    #Data for new block with temp data
+    # Data for new block with temp data
     blockchain.add_block(transaction_data)
-    #Display new block mined
+    # Display new block mined
     block = blockchain.chain[-1]
     pubsub.broadcast_block(block)
     return jsonify(block.to_json())
+
 
 # define our port and conditions
 ROOT_PORT = 5000
