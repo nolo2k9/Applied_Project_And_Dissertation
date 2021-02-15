@@ -102,7 +102,8 @@ It is important to use python 3.8 as some modules and their method calls are onl
 
 [11] Useful info on synching peers; https://bigishdata.com/2017/10/27/build-your-own-blockchain-part-2-syncing-chains-from-different-nodes/
 
-[10] https://docs.python.org/3/library/uuid.html
+[12] https://docs.python.org/3/library/uuid.html
 
-[11] https://pycryptodome.readthedocs.io/en/latest/src/public_key/ecc.html
-[12] https://cryptography.io/en/latest/hazmat/backends/
+[13] https://pycryptodome.readthedocs.io/en/latest/src/public_key/ecc.html
+
+[14] https://cryptography.io/en/latest/hazmat/backends/
