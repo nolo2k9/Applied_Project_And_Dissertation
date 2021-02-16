@@ -1,5 +1,4 @@
-# Applied_Project_And_Minor_Dissertation
-
+# Delta-Coin-Cryptocurrency
 ### Keith Nolan & Cuan O'Conchuir.
 
 # About the Blockchain
