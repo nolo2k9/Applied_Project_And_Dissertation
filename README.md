@@ -1,4 +1,4 @@
-# Delta-Coin-Cryptocurrency
+# Delta Coin Cryptocurrency
 ### Keith Nolan & Cuan O'Conchuir.
 
 # About the Blockchain
