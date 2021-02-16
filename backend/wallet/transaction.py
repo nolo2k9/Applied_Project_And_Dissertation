@@ -57,7 +57,36 @@ class Transaction:
                     'public_key': sender_wallet.public_key,
                     'signature' : sender_wallet.sign(output)
                 }
+    
+    def update(self, sender_wallet,recipient, amount):
+        """
+        Updates transactions with an existing or new recipient.
+        """
+        # Check to see if the amount being sent is greater than the holders balance
+        if amount > self.output[sender_wallet.address]:
+            raise Exception('Amount exceeds balance')
+        
+        if recipient in self.output:
+            # Add the new amount being sent to the recipient
+            self.output[recipient] = self.output[recipient] + amount
             
+        else: 
+            self.output[recipient] = amount
+            
+        self.output[sender_wallet.address] = self.output[sender_wallet.address] - amount
+        
+        #Resign the transaction.
+        
+        self.input = self.create_input(sender_wallet, self.output)
+        
+            
+            
+        
+        
+            
+        
+        
+               
 def main():
     transaction = Transaction(Wallet(), 'recipient', 15)
     print(f'transaction.__dict__: {transaction.__dict__}')
