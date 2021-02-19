@@ -30,8 +30,10 @@ HEX_TO_BINARY_CONVERSION_TABLE = {
 """
 Our conversion method
 """
+
+
 def hex_to_binary(hex_string):
-    binary_string = '' # result
+    binary_string = ''  # result
 
     # loop through dictionary and find relevant character
     # then add it to binary_string
@@ -40,25 +42,32 @@ def hex_to_binary(hex_string):
 
     return binary_string
 
+
 """
 Testing with output
 """
+
+
 def main():
     number = 451
-    hex_number = hex(number)[2:] # 'hex' returns the hex of our int #[2:] eliminates the leading 0x in hex return
+    # 'hex' returns the hex of our int #[2:] eliminates the leading 0x in hex return
+    hex_number = hex(number)[2:]
     print(f'hex_number: {hex_number}')
 
     # hex to binary representation using our function
     binary_number = hex_to_binary(hex_number)
     print(f'binary_number: {binary_number}')
 
-    original_number = int(binary_number, 2) # global int function converts our string back to a int # '2' param specifies it as a binary conversion
+    # global int function converts our string back to a int # '2' param specifies it as a binary conversion
+    original_number = int(binary_number, 2)
     print(f'original_number: {original_number}')
 
     # Will return a 256 character which is a binary rep of the hash
     # - NOTE NEEDS TO BE IMPLEMENTED IN MINING
-    hex_to_binary_crypto_hash = hex_to_binary(crypto_hash('test-data')) # covert the value of a call to crypto_hash
+    # covert the value of a call to crypto_hash
+    hex_to_binary_crypto_hash = hex_to_binary(crypto_hash('test-data'))
     print(f'hex_to_binary_crypto_hash: {hex_to_binary_crypto_hash}')
+
 
 if __name__ == '__main__':
     main()

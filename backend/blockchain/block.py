@@ -1,10 +1,10 @@
 import time
 from backend.utils.hashing import crypto_hash  # hash function
-from backend.utils.hex_to_binary import hex_to_binary # hex_to_binary function
+from backend.utils.hex_to_binary import hex_to_binary  # hex_to_binary function
 from backend.config import MINE_RATE
 
-#Global variable GENESIS_DATA
-#GENESIS_DATA dictionary
+# Global variable GENESIS_DATA
+# GENESIS_DATA dictionary
 GENESIS_DATA = {
     'timeStamp': 1,
     'last_hash': 'genesis_last_hash',
@@ -13,6 +13,7 @@ GENESIS_DATA = {
     'difficulty': 5,
     'nonce': 'genesis_nonce'
 }
+
 
 class Block:
     """
@@ -49,15 +50,16 @@ class Block:
             f'difficulty: {self.difficulty}, '
             f'nonce: {self.nonce}) '
         )
-        
+
     def __eq__(self, other):
-        return self.__dict__ == other.dict
+        return self.__dict__ == other.__dict__
 
     def to_json(self):
         """
         Serialize the block into a dicionary representation
         """
         return self.__dict__
+
     @staticmethod
     def mine_block(last_block, data):
         """
@@ -91,7 +93,7 @@ class Block:
         When the correct nonce is found the loop will be broken 
         Then a new block will be returned
         """
-        while hex_to_binary(hash)[0:difficulty] != '0' * difficulty: # hash is converted here using hex_to_binary imported function
+        while hex_to_binary(hash)[0:difficulty] != '0' * difficulty:  # hash is converted here using hex_to_binary imported function
             # Add one to the nonce value
             nonce += 1
 
@@ -113,13 +115,13 @@ class Block:
         """
         return Block(
 
-          GENESIS_DATA['timeStamp'],
-          GENESIS_DATA['last_hash'],
-          GENESIS_DATA['hash'],
-          GENESIS_DATA['data'],
-          GENESIS_DATA['difficulty'],
-          GENESIS_DATA['nonce']
-      )
+            GENESIS_DATA['timeStamp'],
+            GENESIS_DATA['last_hash'],
+            GENESIS_DATA['hash'],
+            GENESIS_DATA['data'],
+            GENESIS_DATA['difficulty'],
+            GENESIS_DATA['nonce']
+        )
 
     @staticmethod
     def from_json(block_json):
@@ -127,29 +129,29 @@ class Block:
         This method will deserialize a blocks json representation back into a block instance.
         """
         return Block(**block_json)
-     
-    @staticmethod 
+
+    @staticmethod
     def change_difficulty(last_block, new_timestamp):
         """
         Method to calculate the adjusted difficulty according to the set MINE_RATE
         If the last block is mined faster than the MINE_RATE it will increase the difficulty and make it more difficult for the next block.
         If the last block is mined slower than the MINE_RATE it will decrease the difficulty and make it less diffiult for the next block.
         Default of 1 
-        """ 
-        
+        """
+
         """
         Checking the timestamp of the previous block
         If the value of the new_timestamp - last_block.last_block.timestamp is less than the MINE_RATE
         Increase the difficulty by 1 otherwise knock 1 off the difficulty
         """
         if(new_timestamp - last_block.timestamp) < MINE_RATE:
-            return last_block.difficulty +1
-        
-        if(last_block.difficulty -1 ) > 0:
+            return last_block.difficulty + 1
+
+        if(last_block.difficulty - 1) > 0:
             return last_block.difficulty - 1
-        
+
         return 1
-    
+
     @staticmethod
     def isValidBlock(last_block, block):
         """
@@ -159,34 +161,37 @@ class Block:
         - The difficulty must only be adjusted by 1
         - The block hash must be a valid combination of the block fields
         """
-        #if this blocks lash hash is not the same as the one before it raise an exception
+        # if this blocks lash hash is not the same as the one before it raise an exception
         if block.last_hash != last_block.hash:
-            
+
             raise Exception('The blocks lash_hash must be correct')
-        
-        #if the difficulty is not the same raise an exception
+
+        # if the difficulty is not the same raise an exception
         "Wrapped in a call to hext to binary as its calling on the binary representation rather than the original hex representation"
         if hex_to_binary(block.hash)[0:block.difficulty] != '0' * block.difficulty:
-            raise Exception('The correct proof of work requirement was not met')
-        
+            raise Exception(
+                'The correct proof of work requirement was not met')
+
         "Check that the difficulty is only being adjusted by one"
-        #check the difference between the difficulty of the last block and the current difficulty
+        # check the difference between the difficulty of the last block and the current difficulty
         # get absolute value of the difference
-        if abs(last_block.difficulty - block.difficulty) >1:
+        if abs(last_block.difficulty - block.difficulty) > 1:
             raise Exception('Block difficulty must only be adjusted by one')
-        
-        #variable: reconstructed hash
+
+        # variable: reconstructed hash
         reconstructed_hash = crypto_hash(
             block.timestamp,
             block.last_hash,
             block.data,
             block.nonce,
-            block.difficulty   
+            block.difficulty
         )
-        
+
         if block.hash != reconstructed_hash:
-            raise Exception('Block hash must be correct: Block hash must be a valid combination of the block fields')
-          
+            raise Exception(
+                'Block hash must be correct: Block hash must be a valid combination of the block fields')
+
+
 def main():
     genesis_block = Block.genesis()
     bad_block = Block.mine_block(Block.genesis(), 'foo')
@@ -195,6 +200,7 @@ def main():
         Block.isValidBlock(genesis_block, bad_block)
     except Exception as e:
         print(f'is_valid_block: {e}')
-    
+
+
 if __name__ == '__main__':
     main()
