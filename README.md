@@ -116,3 +116,7 @@ It is important to use python 3.8 as some modules and their method calls are onl
 [15] PEM encoding Docs; https://pycryptodome.readthedocs.io/en/latest/src/io/pem.html
 
 [16] Hazmat SubjectPublicKey information and examples used as inspiration for our code; https://programtalk.com/python-examples/cryptography.hazmat.primitives.serialization.PublicFormat.SubjectPublicKeyInfo/
+
+[17] ECDSA and DSS info; https://pycryptodome.readthedocs.io/en/latest/src/signature/dsa.html
+
+[18] Serialization using hazmat docs; https://cryptography.io/en/latest/hazmat/primitives/asymmetric/serialization.html
