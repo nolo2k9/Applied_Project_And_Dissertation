@@ -45,6 +45,10 @@ Hash functions consist of a set of 5 properties:
 
 The way the hash is implemented into the blockchain is essentially much like the pointers to data in a linked list. Each block contains the data and a hash pointer that points to the previous block, creating a chain. The hash pointer contains the address of the previous block and the hash of the data inside the previous block. This is what makes blockchain so reliable in its security. If a hacker attempts to hack a block or change the data in one of the blocks this change in data means the hash of the data will also change. The blocks with hash pointers that are reliant on the previous hash can now no longer find that hash value because the data has changed.
 
+### Postman
+
+Postman was used for testing and sending HTTP requests throughout our application.
+
 ### Python Version
 
 It is important to use python 3.8 as some modules and their method calls are only present in 3.7 and beyond.
@@ -108,3 +112,7 @@ It is important to use python 3.8 as some modules and their method calls are onl
 [13] https://pycryptodome.readthedocs.io/en/latest/src/public_key/ecc.html
 
 [14] https://cryptography.io/en/latest/hazmat/backends/
+
+[15] PEM encoding Docs; https://pycryptodome.readthedocs.io/en/latest/src/io/pem.html
+
+[16] Hazmat SubjectPublicKey information and examples used as inspiration for our code; https://programtalk.com/python-examples/cryptography.hazmat.primitives.serialization.PublicFormat.SubjectPublicKeyInfo/

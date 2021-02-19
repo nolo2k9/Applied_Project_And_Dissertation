@@ -3,11 +3,8 @@ import json
 from backend.config import STARTING_BALANCE
 
 from cryptography.hazmat.backends import default_backend
-
-# Eliptic cryptography module
-from cryptography.hazmat.primitives.asymmetric import ec
-# Import hashing implmentation
-from cryptography.hazmat.primitives import hashes
+from cryptography.hazmat.primitives.asymmetric import ec # Eliptic cryptography module
+from cryptography.hazmat.primitives import hashes, serialization # Import hashing and serialization implementations
 from cryptography.exceptions import InvalidSignature
 
 
@@ -37,12 +34,12 @@ class Wallet:
             ec.SECP256K1(), default_backend())
         # Assigning public_key according to self.private_key.public_key()
         self.public_key = self.private_key.public_key()
+        self.serialize_public_key()
 
     def sign(self, data):
         """
         This method generates a signature based on the data using the local private key.
-        """
-        """
+
         Takes the data that needs to be signed and the ECDSA method from the elipical curve algorithm.
         ECDSA- Eliptical Curve Cryptography Digital Signature Algorithm.
         Takes in a hashing implementation SHA 256
@@ -52,13 +49,29 @@ class Wallet:
                                      ec.ECDSA(hashes.SHA256())
                                      )
 
+    def serialize_public_key(self):
+        """
+        Resets public key to its serialized version
+        """
+        # reassign public_key to decoded version
+        self.public_key = self.public_key.public_bytes(
+            encoding = serialization.Encoding.PEM, 
+            format = serialization.PublicFormat.SubjectPublicKeyInfo # represent public key as a byte string
+        ).decode('utf-8') # back to a regular string 
+
     @staticmethod
     def verify(public_key, data, signature):
         """
         This method verify's a signature based on the wallets public and data.
         """
+        # incoming key is a string, we need to turn it back into something readable by the method
+        deserialized_public_key = serialization.load_pem_public_key(
+            public_key.encode('utf-8'),
+            default_backend()
+        )
+
         try:
-            public_key.verify(signature, json.dumps(
+            deserialized_public_key.verify(signature, json.dumps(
                 data).encode('utf-8'), ec.ECDSA(hashes.SHA256()))
             return True
         # catch Invalid Signature exception
@@ -68,7 +81,7 @@ class Wallet:
 
 def main():
     wallet = Wallet()
-    print(f'wallet.__dict__: {wallet.__dict__}')
+    print(f'wallet.__dict__: {wallet.__dict__}') # print wallet dictionary
     # Generate a signature
     data = {'foo': 'bar'}
     signature = wallet.sign(data)
