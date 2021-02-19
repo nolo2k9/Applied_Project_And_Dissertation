@@ -50,6 +50,5 @@ if os.environ.get('PEER') == 'True':
     except Exception as e:
         print(f'\n -- Error synchronizing: {e}')
 
-
 # run app on our port
 app.run(port=PORT)
