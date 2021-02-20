@@ -4,6 +4,7 @@ from pubnub.pnconfiguration import PNConfiguration
 from pubnub.callbacks import SubscribeCallback
 
 from backend.blockchain.block import Block
+from backend.wallet.transaction import Transaction
 
 pnconfig = PNConfiguration()
 # Subscribe key
@@ -15,13 +16,15 @@ pubnub = PubNub(pnconfig)
 # Dictionary of channels
 CHANNELS = {
     'TEST': 'TEST',
-    'BLOCK': 'BLOCK'
+    'BLOCK': 'BLOCK',
+    'TRANSACTION': 'TRANSACTION'
 }
 
 
 class Listener(SubscribeCallback):
-    def __init__(self, blockchain):
+    def __init__(self, blockchain, transaction_pool):
         self.blockchain = blockchain
+        self.transaction_pool = transaction_pool
 
     # Subscribe to message channel
     def message(self, pubnub, message_object):
@@ -39,37 +42,42 @@ class Listener(SubscribeCallback):
                 print('\n -- Successfully replaced the local chain')
             except Exception as e:
                 print(f'\n -- Did not replace chain: {e}')
-
-
-"""
-Handles publish subscribe layer of application
-Provides communication between nodes in the blockchain network
-"""
+        elif message_object.channel == CHANNELS['TRANSACTION']:
+            transaction = Transaction.from_json(message_object.message) # restored the transaction
+            self.transaction_pool.set_transaction(transaction)
+            print('\n -- Set the new transaction in the transaction pool')
 
 
 class PubSub():
-    def __init__(self, blockchain):
+    """
+    Handles publish subscribe layer of application
+    Provides communication between nodes in the blockchain network
+    """
+    def __init__(self, blockchain, transaction_pool):
         self.pubnub = PubNub(pnconfig)
         # Subscribe to test channel
         self.pubnub.subscribe().channels(
             CHANNELS.values()).execute()  # passes in our dictionary
         # Listen for incoming messages
-        self.pubnub.add_listener(Listener(blockchain))
-
-    """
-    Publish the message object to channel
-    """
+        self.pubnub.add_listener(Listener(blockchain, transaction_pool))
 
     def publish(self, channel, message):
-        # Publish message to channel
+        """
+        Publish the message object to channel
+        """
         self.pubnub.publish().channel(channel).message(message).sync()
 
-    """
-    Broadcast a block object to all nodes
-    """
-
     def broadcast_block(self, block):
+        """
+        Broadcast a block object to all nodes
+        """
         self.publish(CHANNELS['BLOCK'], block.to_json())
+
+    def broadcast_transaction(self, transaction):
+        """
+        Will broadcast a transaction to all nodes.
+        """
+        self.publish(CHANNELS['TRANSACTION'], transaction.to_json())
 
 
 def main():

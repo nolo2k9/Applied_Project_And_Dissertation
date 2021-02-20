@@ -6,7 +6,15 @@ class Transaction:
     Store an exchange of currency from the sender to one or more recipients.
     """
     
-    def __init__(self, sender_wallet, recipient, amount):
+    def __init__(
+        self, 
+        sender_wallet = None, 
+        recipient = None, 
+        amount = None, 
+        id = None, 
+        output = None, 
+        input = None
+    ):
         """
         The sender wallet represents an instance of the sender wallets class.
         A sign method will be used to generate a signature for a transaction.
@@ -21,12 +29,12 @@ class Transaction:
         By preventing a transaction with the same id from being recorded. 
         Will help searching for a transaction in the long list of recorded trasnactions on the blockchain.
         """
-        #Get the first 8 characters from generated uuid 
-        self.id = str(uuid.uuid4())[0:8]
-        #Output records who the recipients of the transaction are and how much currency is being recieved from the transaction
-        self.output = self.create_output(sender_wallet, recipient, amount)
-        #Input receives metadata about the transaction such as the timestamp, the senders address, the public key and transaction signature
-        self.input = self.create_input(sender_wallet, self.output)
+        #Get the first 8 characters from generated uuid OR transaction pools id
+        self.id = id or str(uuid.uuid4())[0:8]
+        #Output records who the recipients of the transaction are and how much currency is being recieved from the transaction OR transaction pool
+        self.output = output or self.create_output(sender_wallet, recipient, amount)
+        #Input receives metadata about the transaction such as the timestamp, the senders address, the public key and transaction signature OR from transaction pool
+        self.input = input or self.create_input(sender_wallet, self.output)
         
     def create_output(self, sender_wallet, recipient, amount):
                 """
@@ -84,6 +92,19 @@ class Transaction:
         Serialize the transaction
         """        
         return self.__dict__ # dictionary representation
+
+
+    @staticmethod
+    def from_json(transaction_json):
+        """
+        Deserialize a transactions json representation back into a Transaction instance.
+        It is a dictionary of all the transactions instances.
+        """
+        return Transaction(
+            id = transaction_json['id'],
+            output = transaction_json['output'],
+            input = transaction_json['input']
+        )
             
     @staticmethod
     def is_valid_transaction(transaction):
@@ -109,6 +130,10 @@ class Transaction:
 def main():
     transaction = Transaction(Wallet(), 'recipient', 15)
     print(f'transaction.__dict__: {transaction.__dict__}')
+
+    transaction_json = transaction.to_json()
+    restored_transaction = Transaction.from_json(transaction_json)
+    print(f'restored_transaction.__dict__: {restored_transaction.__dict__}')
 
 if __name__ == '__main__':
     main()

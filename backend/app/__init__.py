@@ -7,6 +7,7 @@ from backend.pubsub import PubSub
 
 from backend.wallet.wallet import Wallet
 from backend.wallet.transaction import Transaction
+from backend.wallet.transaction_pool import TransactionPool
 
 import os
 import random
@@ -15,8 +16,9 @@ import requests
 
 app = Flask(__name__)
 blockchain = Blockchain()
-pubsub = PubSub(blockchain)
 wallet = Wallet()
+transaction_pool = TransactionPool()
+pubsub = PubSub(blockchain, transaction_pool)
 
 
 @app.route('/')
@@ -53,7 +55,7 @@ def route_wallet_transact():
         transaction_data['amount']
     )
 
-    print(f'transaction.to_json():  {transaction.to_json()}')
+    pubsub.broadcast_transaction(transaction)
 
     return jsonify(transaction.to_json())
 
