@@ -24,6 +24,18 @@ class TransactionPool:
         # transaction data
         # the method returns json so we need to map it
         return list(map(
-                lambda transaction: transaction.to_json(), 
-                self.transaction_map.values()
-            ))
+            lambda transaction: transaction.to_json(), 
+            self.transaction_map.values()
+        ))
+
+    def clear_blockchain_transactions(self, blockchain):
+        """
+        Delete blockchain recorded transactions from the transaction pool
+        """
+        for block in blockchain.chain:
+            for transaction in block.data:
+                # try catch pythons key error when searching
+                try:
+                    del self.transaction_map[transaction['id']]
+                except KeyError:
+                    pass

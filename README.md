@@ -80,6 +80,8 @@ It is important to use python 3.8 as some modules and their method calls are onl
 `python -m backend.scripts.average_block_rate`
 **Run Demo of hex_to_binary class**
 `python -m backend.utils.hex_to_binary`
+**Run a test script that outputs transaction data and a mined blocks data**
+`python -m backend.scripts.test_app`
 
 ---
 

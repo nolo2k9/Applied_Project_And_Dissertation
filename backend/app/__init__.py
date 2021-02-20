@@ -39,7 +39,8 @@ def route_blockchain_mine():
     # Display new block mined
     block = blockchain.chain[-1]
     pubsub.broadcast_block(block)
-    
+    transaction_pool.clear_blockchain_transactions(blockchain)
+
     return jsonify(block.to_json())
 
 # Generate a new transaction instance
