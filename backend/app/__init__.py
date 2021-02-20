@@ -34,13 +34,12 @@ def route_blockchain():
 
 @app.route('/blockchain/mine')
 def route_blockchain_mine():
-    # Temp transaction data
-    transaction_data = 'stubbed_transaction_data'
     # Data for new block with temp data
-    blockchain.add_block(transaction_data)
+    blockchain.add_block(transaction_pool.transaction_data())
     # Display new block mined
     block = blockchain.chain[-1]
     pubsub.broadcast_block(block)
+    
     return jsonify(block.to_json())
 
 # Generate a new transaction instance
@@ -49,11 +48,21 @@ def route_wallet_transact():
     # pass in wallet for the transaction
     transaction_data = request.get_json() # as json
     # creates a valid transaction instance
-    transaction = Transaction(
-        wallet,
-        transaction_data['recipient'],
-        transaction_data['amount']
-    )
+    transaction = transaction_pool.existing_transaction(wallet.address)
+
+    # Check for existing then update, otherwise make a new transaction
+    if transaction:
+        transaction.update(
+            wallet,
+            transaction_data['recipient'],
+            transaction_data['amount']
+        )
+    else:
+        transaction = Transaction(
+            wallet,
+            transaction_data['recipient'],
+            transaction_data['amount']
+        )
 
     pubsub.broadcast_transaction(transaction)
 

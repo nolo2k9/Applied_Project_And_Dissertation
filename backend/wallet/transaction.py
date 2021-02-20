@@ -100,11 +100,7 @@ class Transaction:
         Deserialize a transactions json representation back into a Transaction instance.
         It is a dictionary of all the transactions instances.
         """
-        return Transaction(
-            id = transaction_json['id'],
-            output = transaction_json['output'],
-            input = transaction_json['input']
-        )
+        return Transaction(**transaction_json)
             
     @staticmethod
     def is_valid_transaction(transaction):
