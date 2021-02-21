@@ -16,7 +16,7 @@ import requests
 
 app = Flask(__name__)
 blockchain = Blockchain()
-wallet = Wallet()
+wallet = Wallet(blockchain)
 transaction_pool = TransactionPool()
 pubsub = PubSub(blockchain, transaction_pool)
 
@@ -68,7 +68,12 @@ def route_wallet_transact():
     pubsub.broadcast_transaction(transaction)
 
     return jsonify(transaction.to_json())
-
+#Access your wallets information from the api
+@app.route('/wallet/info')
+def route_wallet():
+    #Returns the address and balance of the wallet.
+    return jsonify({'address': wallet.address,'balance': wallet.balance })
+    
 # define our port and conditions
 ROOT_PORT = 5000
 PORT = ROOT_PORT

@@ -19,15 +19,15 @@ class Wallet:
     Allows a miner to authorize transactions.
     """
 
-    def __init__(self):
+    def __init__(self, blockchain = None):
+        self.blockchain = blockchain
         """
         Wallet address first 8 characters from a uuid 
         https://docs.python.org/3/library/uuid.html
 
         """
         self.address = str(uuid.uuid4())[0:8]
-        # Wallet balance
-        self.balance = STARTING_BALANCE
+       
         """
         Setting the wallets private key to the result of calling this function.
         SECP256K1(): Eliptic base algorithm: Standards of effiecient cryptography Prime 256 bits
@@ -39,6 +39,18 @@ class Wallet:
         # Assigning public_key according to self.private_key.public_key()
         self.public_key = self.private_key.public_key()
         self.serialize_public_key()
+    
+    """
+    @Property allows the code in this method to be ran each time the wallet.balance attribute is used.
+    """
+    @property
+    def balance(self):
+        
+        return Wallet.calculate_balance(self.blockchain, self.address)
+        
+        
+        
+        
 
     def sign(self, data):
         """
@@ -95,6 +107,10 @@ class Wallet:
         since the most recent transaction by that address.
         """
         balance = STARTING_BALANCE
+        
+        if not blockchain:
+            return balance
+            
 
         for block in blockchain.chain:
             for transaction in block.data:
