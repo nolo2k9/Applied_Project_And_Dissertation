@@ -1,5 +1,6 @@
 from backend.blockchain.block import Block
-
+from backend.wallet.transaction import Transaction
+from backend.config import MINING_REWARD_INPUT
 
 class Blockchain:
     """
@@ -86,6 +87,50 @@ class Blockchain:
             last_block = chain[i-1]
             # Check conditions laid out in isValidBlock
             Block.isValidBlock(last_block, block)
+
+    @staticmethod
+    def is_valid_transaction_chain(chain):
+        """
+        Enforces chain transaction boundaries.
+        - Transactions must unique
+        - Must only be one mining reward for mining a block
+        - Every transaction must be valid
+        """
+        # Set of transaction id's
+        transaction_ids = set()
+        # For each block in the chain
+        for block in chain:
+            #Control mining reward
+            has_mining_reward = False
+            """
+            Iterate through each transaction in this blocks data
+            Blocks consist of json representations of each transaction
+            Calling each item in the block data
+            """
+            #Process that transactions json
+            for transaction_json in block.data: 
+                #https://stackoverflow.com/questions/6578986/how-to-convert-json-data-into-a-python-object
+                transaction = Transaction.from_json(transaction_json)
+                
+                if transaction.input == MINING_REWARD_INPUT:
+                    #If already true
+                    if has_mining_reward:
+                        raise Exception ('Only one mining reward per block is allowed.'\
+                            f'Check the followig block hash: {block.hash}'
+                            )
+                    #Set to true
+                    has_mining_reward = True
+                    
+                #Enforcing unique transactions
+                if transaction.id in transaction_ids:
+                    #Show exception
+                    raise Exception(f'Transaction: {transaction.id}. This transaction is not unique')
+                
+                #If transaction is unique add it to the set of transactions
+                transaction_ids.add(transaction.id)
+                Transaction.is_valid_transaction(transaction)
+                    
+                
 
 
 def main():
