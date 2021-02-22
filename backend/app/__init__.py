@@ -34,8 +34,11 @@ def route_blockchain():
 
 @app.route('/blockchain/mine')
 def route_blockchain_mine():
+    transaction_data = transaction_pool.transaction_data()
+    #Reward the local wallet (Your wallet)
+    transaction_data.append(Transaction.reward_transaction(wallet).to_json())
     # Data for new block with temp data
-    blockchain.add_block(transaction_pool.transaction_data())
+    blockchain.add_block(transaction_data)
     # Display new block mined
     block = blockchain.chain[-1]
     pubsub.broadcast_block(block)

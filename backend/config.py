@@ -15,3 +15,7 @@ MINE_RATE = 4 * SECS
 
 # Declaring a starting balance for each wallet
 STARTING_BALANCE = 1000
+#Reward in Deltacoin for mining a block
+MINING_REWARD = 25
+
+MINING_REWARD_INPUT = {'address': '*--official-mining-reward --*'}
