@@ -82,6 +82,15 @@ It is important to use python 3.8 as some modules and their method calls are onl
 `python -m backend.utils.hex_to_binary`
 **Run a test script that outputs transaction data and a mined blocks data**
 `python -m backend.scripts.test_app`
+**Install node**
+https://nodejs.org/en/download/
+
+**Run the frontend**
+When insde the front end directory:
+```
+npm run start
+```
+
 
 ---
 
