@@ -22,7 +22,7 @@ function App() {
       <b/>
       <div className="WalletInfo">
         <div>Your Wallet Address: {address}</div>
-        <div>Your currenct Balance: {balance}</div>
+        <div>Your Current Balance: {balance}</div>
       </div>
       <br/>
       <Blockchain />
