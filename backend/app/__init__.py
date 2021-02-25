@@ -8,6 +8,8 @@ from backend.pubsub import PubSub
 from backend.wallet.wallet import Wallet
 from backend.wallet.transaction import Transaction
 from backend.wallet.transaction_pool import TransactionPool
+#Import flask middleware
+from flask_cors import CORS
 
 import os
 import random
@@ -15,6 +17,8 @@ import requests
 
 
 app = Flask(__name__)
+#Enable Cors
+CORS(app, resourses={r'/*':{'origins': 'http://localhost:3000'} })
 blockchain = Blockchain()
 wallet = Wallet(blockchain)
 transaction_pool = TransactionPool()

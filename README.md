@@ -131,4 +131,7 @@ npm run start
 [17] ECDSA and DSS info; https://pycryptodome.readthedocs.io/en/latest/src/signature/dsa.html
 
 [18] Serialization using hazmat docs; https://cryptography.io/en/latest/hazmat/primitives/asymmetric/serialization.html
+
 [19] Property Python: https://www.programiz.com/python-programming/property
+
+[20] Flask CORS: https://pypi.org/project/Flask-Cors/
