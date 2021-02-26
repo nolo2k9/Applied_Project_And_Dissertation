@@ -35,6 +35,18 @@ def route_blockchain():
     # Wrapping call to blockchain with jsonify
     return jsonify(blockchain.to_json())
 
+@app.route('/blockchain/range')
+def route_blockchain_range():
+    #Start and end points casted to an int
+    start = int(request.args.get('start'))
+    end = int(request.args.get('end'))
+    #Return a slice of the data between the two points. Return the list starting from the most recent block
+    return jsonify(blockchain.to_json()[::-1][start:end])
+
+#Return the length of the blockchain
+@app.route('/blockchain/length')
+def route_blockchain_length():
+    return jsonify(len(blockchain.chain))
 
 @app.route('/blockchain/mine')
 def route_blockchain_mine():
