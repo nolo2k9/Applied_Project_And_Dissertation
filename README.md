@@ -87,9 +87,12 @@ https://nodejs.org/en/download/
 
 **Run the frontend**
 When insde the front end directory:
-```
-npm run start
-```
+`npm run start`
+
+**Seed the backend with 10 blocks and 2 transactions each**
+`source blockchain-env/bin/activate`
+`export SEED_DATA=True && python3 -m backend.app`
+
 
 
 ---

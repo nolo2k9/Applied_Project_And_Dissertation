@@ -96,6 +96,16 @@ if os.environ.get('PEER') == 'True':
         print('\n -- Successfully synchronized the local chain')
     except Exception as e:
         print(f'\n -- Error synchronizing: {e}')
+        
+#Automatically create 10 blocks with 2 transactions each in the backend
+if os.environ.get('SEED_DATA') == 'True':
+    for i in range(10):
+        blockchain.add_block([
+            #Instantiating wallet, random address and random amount
+            Transaction(Wallet(), Wallet().address, random.randint(2,50)).to_json(),
+            Transaction(Wallet(), Wallet().address, random.randint(2,50)).to_json()
+        ])
+        
 
 # run app on our port
 app.run(port=PORT)
