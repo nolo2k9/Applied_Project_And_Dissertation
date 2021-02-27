@@ -62,37 +62,50 @@ It is important to use python 3.8 as some modules and their method calls are onl
 
 `pip3 install -r requirements.txt` Install necessary plugins/resources
 
-**Run the application and API**
-**Virtual Enviornment set up to create an isolated environment to do tests without having if effect the whole system**
+**Install node**
+https://nodejs.org/en/download/
+
+
+## Run the application and API
+**Virtual Enviornment is set up to create an isolated environment to do tests without having if effect the whole system**
 
 - Activate the virtual environment `source blockchain-env/bin/activate`
 
 - Start the application and api `python3 -m backend.app`
 
+
 **Run a peer instance - Export environment variable (for testing)**
 `export PEER=True && python3 -m backend.app`
+
+
+**Seed the backend with 10 example blocks and 2 transactions each**
+`source blockchain-env/bin/activate`
+`export SEED_DATA=True && python3 -m backend.app`
+
+
+**Run the frontend**
+When inside the front end directory:
+`npm run start`
+
+(NOTE: If this will not run, you will need to do an `npm install` first)
+
 
 ### Demos
 
 **Run block class. shows an example of what is included in a block, and the difficulty**
 `python -m backend.blockchain.block`
+
+
 **Run a demo of the average rate of blocks - displays difficulty and mining (not necessary for any functionality, is purely with testing/demoing in mind)**
 `python -m backend.scripts.average_block_rate`
+
+
 **Run Demo of hex_to_binary class**
 `python -m backend.utils.hex_to_binary`
+
+
 **Run a test script that outputs transaction data and a mined blocks data**
 `python -m backend.scripts.test_app`
-**Install node**
-https://nodejs.org/en/download/
-
-**Run the frontend**
-When insde the front end directory:
-`npm run start`
-
-**Seed the backend with 10 blocks and 2 transactions each**
-`source blockchain-env/bin/activate`
-`export SEED_DATA=True && python3 -m backend.app`
-
 
 
 ---
@@ -133,7 +146,7 @@ When insde the front end directory:
 
 [17] ECDSA and DSS info; https://pycryptodome.readthedocs.io/en/latest/src/signature/dsa.html
 
-[18] Serialization using hazmat docs; https://cryptography.io/en/latest/hazmat/primitives/asymmetric/serialization.html
+[18] Serialization; hazmat docs; https://cryptography.io/en/latest/hazmat/primitives/asymmetric/serialization.html
 
 [19] Property Python: https://www.programiz.com/python-programming/property
 
