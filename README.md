@@ -151,3 +151,9 @@ When inside the front end directory:
 [19] Property Python: https://www.programiz.com/python-programming/property
 
 [20] Flask CORS: https://pypi.org/project/Flask-Cors/
+
+[21] useEffect hook; React; https://reactjs.org/docs/hooks-effect.html
+
+[22] useState for state management hooks; React; https://reactjs.org/docs/hooks-state.html
+
+[23] StackOverflown; Advice on use of set and clearInterval; https://stackoverflow.com/questions/5978519/how-to-use-setinterval-and-clearinterval
