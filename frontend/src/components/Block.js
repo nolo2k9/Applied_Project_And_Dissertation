@@ -1,4 +1,4 @@
-import Reac, { useState } from 'react'
+import React, { useState } from 'react'
 import { Button } from 'react-bootstrap'
 import { MILLISECONDS_PYTHON } from '../config'
 import Transaction from './Transactions'

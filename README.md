@@ -73,15 +73,8 @@ https://nodejs.org/en/download/
 
 - Start the application and api `python3 -m backend.app`
 
-
-**Run a peer instance - Export environment variable (for testing)**
-`export PEER=True && python3 -m backend.app`
-
-
 **Seed the backend with 10 example blocks and 2 transactions each**
-`source blockchain-env/bin/activate`
 `export SEED_DATA=True && python3 -m backend.app`
-
 
 **Run the frontend**
 When inside the front end directory:
