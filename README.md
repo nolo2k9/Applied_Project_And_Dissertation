@@ -2,10 +2,10 @@
 ### Keith Nolan & Cuan O'Conchuir.
 
 # About this Project
-This project is a Blockchain network and Cryptocurrency.
-The application is a allows users:\
+This project is a Blockchain network and Cryptocurrency.\
+The application is a:\
 • Fully functioning Blockchain application\
-• With a Cryptocurrency\
+• With a Native Cryptocurrency\
 • Allows users to create wallets.\
 • Incorporates Network Transactions using a Publish/Subscribe model.\
 • Has a transaction pool for unconfirmed transactions.\
