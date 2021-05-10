@@ -48,10 +48,6 @@ class Wallet:
         
         return Wallet.calculate_balance(self.blockchain, self.address)
         
-        
-        
-        
-
     def sign(self, data):
         """
         This method generates a signature based on the data using the local private key.
