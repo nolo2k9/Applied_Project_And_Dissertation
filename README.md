@@ -10,7 +10,7 @@ The application is a allows users:\
 • Incorporates Network Transactions using a Publish/Subscribe model.\
 • Has a transaction pool for unconfirmed transactions.\
 • Allows users to mine transactions and receive currency for their effort.\
-• Display all transactions on a public ledger that users of the system can view.\
+• Display all transactions on a public ledger that users of the system can view.
 
 # How to run this Project
 
