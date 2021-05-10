@@ -3,14 +3,14 @@
 
 # About this Project
 This project is a Blockchain network and Cryptocurrency.
-The application is a allows users:
-• Fully functioning Blockchain application
-• With a Cryptocurrency
-• Allows users to create wallets.
-• Incorporates Network Transactions using a Publish/Subscribe model. 
-• Has a transaction pool for unconfirmed transactions.
-• Allows users to mine transactions and receive currency for their effort.
-• Display all transactions on a public ledger that users of the system can view.
+The application is a allows users:\
+• Fully functioning Blockchain application\
+• With a Cryptocurrency\
+• Allows users to create wallets.\
+• Incorporates Network Transactions using a Publish/Subscribe model.\
+• Has a transaction pool for unconfirmed transactions.\
+• Allows users to mine transactions and receive currency for their effort.\
+• Display all transactions on a public ledger that users of the system can view.\
 
 # How to run this Project
 
